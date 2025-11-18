@@ -26,16 +26,16 @@ app.add_middleware(
 
 # Load models
 try:
-    with open('best_model.pkl', 'rb') as f:
+    with open('summative/API/best_model.pkl', 'rb') as f:
         model = pickle.load(f)
-    with open('scaler.pkl', 'rb') as f:
+    with open('summative/API/scaler.pkl', 'rb') as f:
         scaler = pickle.load(f)
-    with open('feature_names.pkl', 'rb') as f:
+    with open('summative/API/feature_names.pkl', 'rb') as f:
         feature_names = pickle.load(f)
-    print("✓ All models loaded successfully!")
+    print("All models loaded successfully!")
 except Exception as e:
-    print(f"⚠ Warning: Error loading models: {e}")
-    print("⚠ Please run the Jupyter notebook first to generate model files")
+    print(f" Warning: Error loading models: {e}")
+    print("Please run the Jupyter notebook first to generate model files")
     model = None
     scaler = None
     feature_names = []
@@ -427,15 +427,15 @@ async def predict(input_data: PredictionInput):
         
         # Generate interpretation
         if prediction >= 300:
-            interpretation = "🎯 Excellent: High job creation potential! This SME is likely to create 300+ jobs, significantly contributing to youth employment."
+            interpretation = "Excellent: High job creation potential! This SME is likely to create 300+ jobs, significantly contributing to youth employment."
         elif prediction >= 200:
-            interpretation = "✅ Very Good: Strong job creation potential. Expected to create 200+ jobs, making meaningful impact on youth unemployment."
+            interpretation = "Very Good: Strong job creation potential. Expected to create 200+ jobs, making meaningful impact on youth unemployment."
         elif prediction >= 100:
-            interpretation = "👍 Good: Moderate job creation potential. Expected to create 100+ jobs, contributing to local employment."
+            interpretation = "Good: Moderate job creation potential. Expected to create 100+ jobs, contributing to local employment."
         elif prediction >= 50:
-            interpretation = "⚠️ Fair: Below-average job creation. Expected to create 50-100 jobs. Consider enhancing digital strategies."
+            interpretation = "Fair: Below-average job creation. Expected to create 50-100 jobs. Consider enhancing digital strategies."
         else:
-            interpretation = "📊 Limited: Low job creation potential (<50 jobs). Recommend investing in digital transformation to scale hiring."
+            interpretation = "Limited: Low job creation potential (<50 jobs). Recommend investing in digital transformation to scale hiring."
         
         return PredictionOutput(
             predicted_employees=prediction,
