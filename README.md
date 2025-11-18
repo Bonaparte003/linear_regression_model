@@ -1,9 +1,3 @@
-[1 tool called]
-
-Based on your transformed project, here's a comprehensive, compelling project description:
-
----
-
 #  African SME Job Creation Predictor
 ## Eradicating Youth Unemployment Through Digital Transformation
 
