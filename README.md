@@ -1,4 +1,8 @@
-#  African SME Job Creation Predictor
+<div align="center">
+
+<img src="summative/images/uPredict-logo.png" alt="uPredict Logo" width="200"/>
+
+# African SME Job Creation Predictor
 ## Eradicating Youth Unemployment Through Digital Transformation
 
 [![ML Model](https://img.shields.io/badge/Model-Random%20Forest-success)](https://scikit-learn.org/)
@@ -6,6 +10,8 @@
 [![API](https://img.shields.io/badge/API-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![Mobile](https://img.shields.io/badge/Mobile-Flutter-02569B)](https://flutter.dev/)
 [![Mission](https://img.shields.io/badge/Mission-SDG%208-orange)](https://sdgs.un.org/goals/goal8)
+
+</div>
 
 ---
 
@@ -106,8 +112,8 @@ This project directly addresses **UN SDG 8: Decent Work and Economic Growth** by
 
 ##  Live Deployment
 
-**API Endpoint**: `https://your-api.onrender.com/predict`  
-**Swagger Documentation**: `https://your-api.onrender.com/docs`  
+**API Endpoint**: `https://yhttps://linear-regression-model-sefx.onrender.com/predict`  
+**Swagger Documentation**: `https://https://linear-regression-model-sefx.onrender.com/docs`  
 **Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id)
 
 > Update these after deployment
@@ -163,6 +169,40 @@ flutter run
 flutter build apk
 # APK at: build/app/outputs/flutter-apk/app-release.apk
 ```
+
+---
+
+##  Mobile App Preview
+
+<div align="center">
+
+### Home Screen
+<img src="summative/images/Homepage.jpeg" alt="Home Page" width="250"/>
+
+*Clean, minimalistic landing page with mission statement and quick stats*
+
+---
+
+### Prediction Interface
+<img src="summative/images/JobCreationPage.jpeg" alt="Job Creation Page" width="250"/>
+
+*Intuitive input form with 30 features organized by category*
+
+---
+
+### Results Display
+<img src="summative/images/prediction.jpeg" alt="Prediction Results" width="250"/>
+
+*AI-powered predictions with color-coded interpretation and business insights*
+
+---
+
+### Mission Statement
+<img src="summative/images/Mission_Page.jpeg" alt="About Mission" width="250"/>
+
+*Detailed information about the project's impact and technical approach*
+
+</div>
 
 ---
 
@@ -246,15 +286,49 @@ flutter build apk
 
 ##  Visualizations Generated
 
-The Jupyter notebook creates 7+ publication-ready visualizations:
+The Jupyter notebook creates 6 publication-ready visualizations to understand the data and model performance:
 
-1. **Correlation Heatmap** - Relationships between 30 features
-2. **Employee Distribution** - Histogram & box plot of job creation
-3. **Model Comparison Bar Chart** - R² and MSE across 4 models
-4. **Actual vs Predicted Scatter** - All models with Random Forest highlighted
-5. **Feature Importance** - Top predictors of job creation
-6. **Loss Curves** - SGD training/validation loss over epochs
-7. **Country/Sector Analysis** - Job creation patterns by region
+### 1. Correlation Heatmap
+*Relationships between numeric features and employee count*
+
+<img src="summative/linear_regression/images/correlation_heatmap.png" alt="Correlation Heatmap" width="700"/>
+
+---
+
+### 2. Target Distribution
+*Understanding the spread of employee counts across SMEs*
+
+<img src="summative/linear_regression/images/target_distribution.png" alt="Employee Distribution" width="700"/>
+
+---
+
+### 3. Model Comparison
+*Performance metrics (R² and MSE) across all 4 algorithms*
+
+<img src="summative/linear_regression/images/model_comparison.png" alt="Model Comparison" width="700"/>
+
+---
+
+### 4. Actual vs Predicted - All Models
+*Visual comparison showing Random Forest's superior fit to the perfect line*
+
+<img src="summative/linear_regression/images/actual_vs_predicted_all_models.png" alt="Actual vs Predicted All Models" width="900"/>
+
+**Key Insight**: Random Forest (bottom right) shows predictions tightly clustered around the perfect fit line (red dashed), achieving R²=0.9789 compared to Linear Regression's R²=0.2134.
+
+---
+
+### 5. SGD Training Loss Curve
+*Gradient descent convergence over 1000 iterations*
+
+<img src="summative/linear_regression/images/loss_curve.png" alt="Loss Curve" width="700"/>
+
+---
+
+### 6. Sector & Technology Analysis
+*Job creation patterns by industry sector and tech adoption level*
+
+<img src="summative/linear_regression/images/sector_tech_analysis.png" alt="Sector Tech Analysis" width="900"/>
 
 ---
 
@@ -277,16 +351,19 @@ The Jupyter notebook creates 7+ publication-ready visualizations:
 
 ```
 Summative-ML/
- README.md (this file)
+ README.md                                      # This file with images
  summative/
     linear_regression/
        multivariate.ipynb                      # Main ML pipeline
        african_sme_digital_transformation.csv  # Dataset (1000 SMEs)
        requirements.txt                        # Python deps
-       correlation_heatmap.png                 # Viz 1
-       target_distribution.png                 # Viz 2
-       model_comparison.png                    # Viz 3
-       actual_vs_predicted_*.png               # Viz 4-7
+       images/
+          correlation_heatmap.png              # Feature relationships
+          target_distribution.png              # Employee distribution
+          model_comparison.png                 # Performance metrics
+          actual_vs_predicted_all_models.png   # Model predictions visual
+          loss_curve.png                       # SGD training curve
+          sector_tech_analysis.png             # Sector/tech patterns
     API/
        prediction.py                           # FastAPI app (Pydantic V2)
        requirements.txt                        # API deps
@@ -294,8 +371,16 @@ Summative-ML/
        scaler.pkl                              # StandardScaler (generated)
        feature_names.pkl                       # 30 features (generated)
     FlutterApp/upredict/
-        lib/main.dart                           # Flutter app (806 lines)
-        pubspec.yaml                            # Flutter deps
-        android/ios/web/                        # Platform configs
+       lib/main.dart                           # Flutter app (955 lines)
+       pubspec.yaml                            # Flutter deps
+       android/
+          app/src/main/AndroidManifest.xml     # Internet permissions
+       ios/web/                                # Platform configs
+    images/
+       uPredict-logo.png                       # App branding
+       Homepage.jpeg                           # App screenshot 1
+       JobCreationPage.jpeg                    # App screenshot 2
+       prediction.jpeg                         # App screenshot 3
+       Mission_Page.jpeg                       # App screenshot 4
 ```
 
