@@ -48,11 +48,6 @@ Thumbs.db
 *.csv
 !**/youth_employment_data.csv
 
-# Images (optional)
-*.png
-*.jpg
-*.jpeg
-
 # Flutter
 **/build/
 **/.dart_tool/
