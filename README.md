@@ -191,6 +191,8 @@ flutter build apk
 
 ---
 
+</div>
+
 ##  App Features
 
 ### User-Friendly Interface:
