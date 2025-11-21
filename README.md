@@ -176,13 +176,6 @@ flutter build apk
 
 <div align="center">
 
-### Home Screen
-<img src="summative/images/Homepage.jpeg" alt="Home Page" width="250"/>
-
-*Clean, minimalistic landing page with mission statement and quick stats*
-
----
-
 ### Prediction Interface
 <img src="summative/images/JobCreationPage.jpeg" alt="Job Creation Page" width="250"/>
 
@@ -195,14 +188,6 @@ flutter build apk
 
 *AI-powered predictions with color-coded interpretation and business insights*
 
----
-
-### Mission Statement
-<img src="summative/images/Mission_Page.jpeg" alt="About Mission" width="250"/>
-
-*Detailed information about the project's impact and technical approach*
-
-</div>
 
 ---
 
