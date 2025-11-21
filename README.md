@@ -19,7 +19,7 @@
 
 **The Challenge**: Youth unemployment in Africa exceeds 20%, yet SMEs create 80% of all jobs.
 
-**Our Solution**: Predict how many jobs an African SME will create based on their digital transformation strategies, revenue, and business characteristics.
+**My Solution**: Predict how many jobs an African SME will create based on their digital transformation strategies, revenue, and business characteristics.
 
 **The Impact**: Enable entrepreneurs, investors, and policymakers to identify high-potential SMEs for job creation, make data-driven funding decisions, and design effective digital transformation programs that maximize youth employment.
 
@@ -112,11 +112,11 @@ This project directly addresses **UN SDG 8: Decent Work and Economic Growth** by
 
 ##  Live Deployment
 
-**API Endpoint**: `https://yhttps://linear-regression-model-sefx.onrender.com/predict`  
-**Swagger Documentation**: `https://https://linear-regression-model-sefx.onrender.com/docs`  
+**API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
+**Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
 **Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id)
 
-> Update these after deployment
+> **Note**: Update YouTube link once video is recorded
 
 ---
 

@@ -32,7 +32,7 @@ try:
         scaler = pickle.load(f)
     with open('summative/API/feature_names.pkl', 'rb') as f:
         feature_names = pickle.load(f)
-    print("All models loaded successfully!")
+    print("Model, scaler, and features loaded successfully!")
 except Exception as e:
     print(f" Warning: Error loading models: {e}")
     print("Please run the Jupyter notebook first to generate model files")

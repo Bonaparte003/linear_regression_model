@@ -19,219 +19,207 @@ class SMEJobCreationApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.light,
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  String statusMessage = 'Initializing...';
+  bool hasError = false;
+  int retryCount = 0;
+  final int maxRetries = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    _wakeUpAPI();
+  }
+
+  Future<void> _wakeUpAPI() async {
+    const String baseUrl = 'https://linear-regression-model-sefx.onrender.com';
+    
+    setState(() {
+      statusMessage = 'Waking up the API server...';
+      hasError = false;
+    });
+
+    try {
+      // Try to ping the root endpoint or health endpoint
+      setState(() {
+        statusMessage = 'Connecting to server...\n(This may take up to 60 seconds)';
+      });
+
+      final response = await http.get(
+        Uri.parse(baseUrl),
+      ).timeout(
+        const Duration(seconds: 70),
+        onTimeout: () {
+          throw Exception('Connection timeout');
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 404) {
+        setState(() {
+          statusMessage = 'Server is ready!';
+        });
+        
+        await Future.delayed(const Duration(milliseconds: 500));
+        
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const PredictionPage(),
+            ),
+          );
+        }
+      } else {
+        throw Exception('Server returned status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (retryCount < maxRetries) {
+        retryCount++;
+        setState(() {
+          statusMessage = 'Retrying... (Attempt $retryCount of $maxRetries)';
+        });
+        await Future.delayed(const Duration(seconds: 2));
+        _wakeUpAPI();
+      } else {
+        setState(() {
+          hasError = true;
+          statusMessage = 'Unable to connect to server.\nPlease check your internet connection.';
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'uPredict',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        centerTitle: false,
-        elevation: 0,
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.green.shade600,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PredictionPage(),
-                ),
-              );
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              margin: EdgeInsets.only(right: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.green.shade600),
-                borderRadius: BorderRadius.circular(20),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // App Logo/Icon
+              Icon(
+                Icons.analytics_outlined,
+                size: 80,
+                color: Colors.green.shade600,
               ),
-              child: Text(
-                'Predict',
+              const SizedBox(height: 24),
+              
+              // App Title
+              Text(
+                'uPredict',
                 style: TextStyle(
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade900,
+                ),
+              ),
+              const SizedBox(height: 8),
+              
+              Text(
+                'SME Job Creation Predictor',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              
+              const SizedBox(height: 48),
+              
+              // Loading indicator or error icon
+              if (!hasError)
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.green.shade600,
+                    ),
+                  ),
+                )
+              else
+                Icon(
+                  Icons.error_outline,
+                  size: 50,
+                  color: Colors.red.shade400,
+                ),
+              
+              const SizedBox(height: 24),
+              
+              // Status message
+              Text(
+                statusMessage,
+                style: TextStyle(
                   fontSize: 15,
-                  color: Colors.green.shade600,
+                  color: hasError ? Colors.red.shade700 : Colors.grey.shade700,
+                  height: 1.5,
                 ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Hero Image Section
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/high-angle-friends-with-face-mask-concept.jpg',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.black.withOpacity(0.3),
-                      Colors.black.withOpacity(0.6),
-                    ],
+              
+              const SizedBox(height: 32),
+              
+              // Retry button if error
+              if (hasError)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      retryCount = 0;
+                      hasError = false;
+                    });
+                    _wakeUpAPI();
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Retry'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
+                    backgroundColor: Colors.green.shade600,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
-              ),
-            ),
-
-            // Content Section
-            Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Welcome Message
-                  Text(
-                    'Welcome to uPredict',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade900,
-                      letterSpacing: -0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Mission Statement
-                  Text(
-                    'Empowering Africa\'s Future',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.green.shade700,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Description
-                  Text(
-                    'Predict job creation potential in African SMEs through AI-powered digital transformation insights. Help eradicate youth unemployment by identifying high-impact businesses.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      height: 1.6,
-                      color: Colors.grey.shade700,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-
-                  // Stats Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildStatCard('97.9%', 'Accuracy'),
-                      _buildStatCard('5', 'Countries'),
-                      _buildStatCard('1000', 'SMEs'),
-                    ],
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  // CTA Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 18),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        backgroundColor: Colors.green.shade600,
-                        foregroundColor: Colors.white,
-                        elevation: 2,
+              
+              // Skip button if error (allows user to proceed anyway)
+              if (hasError)
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const PredictionPage(),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PredictionPage(),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.analytics, size: 24),
-                      label: const Text(
-                        'Start Prediction',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                    );
+                  },
+                  child: Text(
+                    'Continue Anyway',
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
                     ),
                   ),
-
-                  const SizedBox(height: 16),
-
-                  // About Button
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AboutPage(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Learn More About This Project',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.green.shade700,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatCard(String value, String label) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.green.shade700,
+                ),
+            ],
           ),
         ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -506,7 +494,7 @@ class _PredictionPageState extends State<PredictionPage> {
         elevation: 0,
         foregroundColor: Colors.white,
         backgroundColor: Colors.green.shade600,
-        iconTheme: IconThemeData(color: Colors.white),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -858,97 +846,3 @@ class _PredictionPageState extends State<PredictionPage> {
   }
 }
 
-class AboutPage extends StatelessWidget {
-  const AboutPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('About'), centerTitle: true),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Icon(
-                Icons.business_center,
-                size: 80,
-                color: Colors.green.shade600,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Center(
-              child: Text(
-                'Our Mission',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              'This application is dedicated to eradicating youth unemployment in Africa through job creation by predicting employment potential in African SMEs based on digital transformation strategies.',
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            _buildInfoCard(
-              'How It Works',
-              'Enter SME details including revenue, growth, digital tools, sector, and challenges. Our AI predicts how many jobs the company will create based on 1,000 African SMEs.',
-              Icons.lightbulb_outline,
-            ),
-            const SizedBox(height: 15),
-            _buildInfoCard(
-              'Purpose',
-              'Help entrepreneurs, investors, and policymakers identify high-potential SMEs for job creation and make data-driven decisions to boost youth employment.',
-              Icons.flag_outlined,
-            ),
-            const SizedBox(height: 15),
-            _buildInfoCard(
-              'Technology',
-              'Built with Flutter for mobile, FastAPI for backend, and Random Forest machine learning model (97.9% accuracy) trained on real African SME data from Ghana, Kenya, Nigeria, Rwanda, and South Africa.',
-              Icons.code,
-            ),
-            const SizedBox(height: 15),
-            _buildInfoCard(
-              'Coverage',
-              '5 Countries: Ghana, Kenya, Nigeria, Rwanda, South Africa\n6 Sectors: Education, Farming, Finance, Logistics, Manufacturing, Retail',
-              Icons.public,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInfoCard(String title, String description, IconData icon) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, size: 30, color: Colors.green.shade600),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(description, style: const TextStyle(fontSize: 14)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
