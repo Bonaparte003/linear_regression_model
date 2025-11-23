@@ -20,7 +20,7 @@
 
 **API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
 **Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
-**Video Demo**: [Demo Video](https://www.youtube.com/watch?v=OZrxAPEmMjE](https://www.youtube.com/watch?v=-LEypuhiTh4)
+**Video Demo**: https://www.youtube.com/watch?v=OZrxAPEmMjE](https://www.youtube.com/watch?v=-LEypuhiTh4
 
 **Mobile App Apk**: [Click Me](https://release-assets.githubusercontent.com/github-production-release-asset/1099061418/4f28430a-fd40-4ce2-bd40-9a7e08d5c8a6?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-23T12%3A43%3A11Z&rscd=attachment%3B+filename%3Dapp-release.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-23T11%3A43%3A05Z&ske=2025-11-23T12%3A43%3A11Z&sks=b&skv=2018-11-09&sig=sm%2BKaawqmLByYri7nWkT%2B8ukFcHB4nFx0n%2BEUHRgSoU%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2Mzg5OTk4NSwibmJmIjoxNzYzODk4MTg1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.TBxmdKNeo6ajaPSgkrMFaKkehuA32qpipJGjCBz-ulA&response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&response-content-type=application%2Fvnd.android.package-archive)
 
