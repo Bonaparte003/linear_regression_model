@@ -13,6 +13,15 @@
 
 </div>
 
+
+---
+
+##  Live Deployment
+
+**API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
+**Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
+**Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id)
+
 ---
 
 ##  Mission Statement
@@ -111,21 +120,10 @@ This project directly addresses **UN SDG 8: Decent Work and Economic Growth** by
 
 ```
 
----
-
-##  Live Deployment
-
-**API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
-**Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
-**Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id)
-
-> **Note**: Update YouTube link once video is recorded
-
----
 
 ##  Quick Start
 
-### 1⃣ Train the Model
+### 1 Train the Model
 
 ```bash
 cd summative/linear_regression
@@ -140,7 +138,7 @@ jupyter notebook multivariate.ipynb
 - `feature_names.pkl` (30 feature names)
 - 8 visualization PNG files
 
-### 2⃣ Run the API Locally
+### 2 Run the API Locally
 
 ```bash
 cd summative/API
@@ -150,7 +148,7 @@ python prediction.py
 # Docs at http://localhost:8000/docs
 ```
 
-### 3⃣ Deploy API to Render
+### 3 Deploy API to Render
 
 1. Push code to GitHub
 2. Create Web Service on [Render](https://render.com)
@@ -158,7 +156,7 @@ python prediction.py
 4. Start: `cd summative/API && uvicorn prediction:app --host 0.0.0.0 --port $PORT`
 5. Copy public URL
 
-### 4⃣ Run Mobile App
+### 4 Run Mobile App
 
 ```bash
 cd summative/FlutterApp/upredict
