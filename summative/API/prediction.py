@@ -199,21 +199,8 @@ class PredictionOutput(BaseModel):
 async def root():
     """Root endpoint with API information"""
     return {
-        "message": "African SME Job Creation Prediction API",
-        "mission": "Eradicating youth unemployment in Africa through digital transformation and job creation",
-        "description": "Predicts employee count (job creation potential) for African SMEs based on digital transformation strategies",
-        "data_source": "1,000 African SMEs across 5 countries",
-        "focus": "Ghana, Kenya, Nigeria, Rwanda, South Africa",
-        "sectors": ["Education", "Farming", "Finance", "Logistics", "Manufacturing", "Retail"],
-        "model": "Random Forest Regressor (97.9% R²)",
-        "endpoints": {
-            "predict": "/predict (POST)",
-            "health": "/health (GET)",
-            "features": "/features (GET)",
-            "countries": "/countries (GET)",
-            "sectors": "/sectors (GET)"
-        },
-        "status": "operational"
+        "message": "Welcome to the African SME Job Creation Prediction API",
+        "instructions": "Visit the /docs endpoint to make predictions the Swagger"
     }
 
 
@@ -232,67 +219,6 @@ async def health_check():
         "scaler_loaded": scaler is not None,
         "features_loaded": len(feature_names) > 0,
         "feature_count": len(feature_names)
-    }
-
-
-@app.get("/features")
-async def get_features():
-    """Get list of required features and their constraints"""
-    return {
-        "numeric_features": [
-            {"name": "annual_revenue", "range": "[1000, 100000000]", "unit": "USD", "description": "Annual revenue"},
-            {"name": "growth_last_yr", "range": "[-100, 500]", "unit": "%", "description": "Growth percentage last year"},
-            {"name": "num_digital_tools", "range": "[1, 3]", "unit": "count", "description": "Number of digital tools"},
-            {"name": "revenue_per_employee", "range": "[100, 1000000]", "unit": "USD", "description": "Revenue per employee"}
-        ],
-        "challenge_indicators": [
-            {"name": "challenge_cost", "values": "[0, 1]", "description": "Cost challenges"},
-            {"name": "challenge_skills", "values": "[0, 1]", "description": "Skills challenges"},
-            {"name": "challenge_internet", "values": "[0, 1]", "description": "Internet challenges"},
-            {"name": "challenge_regulation", "values": "[0, 1]", "description": "Regulation challenges"},
-            {"name": "challenge_awareness", "values": "[0, 1]", "description": "Awareness challenges"}
-        ],
-        "categorical_features": {
-            "country": ["Ghana", "Kenya", "Nigeria", "Rwanda", "South Africa"],
-            "sector": ["Education", "Farming", "Finance", "Logistics", "Manufacturing", "Retail"],
-            "tech_adoption_level": ["High", "Low", "Medium"],
-            "funding_status": ["Bootstrapped", "Seed", "Series A"],
-            "female_owned": ["No", "Yes"],
-            "remote_work_policy": ["Full", "Partial"]
-        },
-        "total_features": 30,
-        "note": "For categorical features, set exactly one indicator to 1 per category, others to 0"
-    }
-
-
-@app.get("/countries")
-async def get_countries():
-    """Get information about supported countries"""
-    return {
-        "countries": [
-            {"name": "Ghana", "indicator": "country_Ghana", "region": "West Africa"},
-            {"name": "Kenya", "indicator": "country_Kenya", "region": "East Africa"},
-            {"name": "Nigeria", "indicator": "country_Nigeria", "region": "West Africa"},
-            {"name": "Rwanda", "indicator": "country_Rwanda", "region": "East Africa"},
-            {"name": "South Africa", "indicator": "country_South_Africa", "region": "Southern Africa"}
-        ],
-        "note": "Set exactly one country indicator to 1, others to 0"
-    }
-
-
-@app.get("/sectors")
-async def get_sectors():
-    """Get information about supported sectors"""
-    return {
-        "sectors": [
-            {"name": "Education", "indicator": "sector_Education"},
-            {"name": "Farming", "indicator": "sector_Farming"},
-            {"name": "Finance", "indicator": "sector_Finance"},
-            {"name": "Logistics", "indicator": "sector_Logistics"},
-            {"name": "Manufacturing", "indicator": "sector_Manufacturing"},
-            {"name": "Retail", "indicator": "sector_Retail"}
-        ],
-        "note": "Set exactly one sector indicator to 1, others to 0"
     }
 
 
