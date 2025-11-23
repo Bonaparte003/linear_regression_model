@@ -83,9 +83,12 @@ This project directly addresses **UN SDG 8: Decent Work and Economic Growth** by
 
   1. JUPYTER NOTEBOOK (ML Pipeline)                  
      • Data loading & exploration                    
+     • Explicit missing value handling (mode imputation)
      • Feature engineering (30 features)             
      • Train 4 models (LR, SGD, DT, RF)             
-     • Generate 7+ visualizations                    
+     • Generate 8 visualizations                    
+     • Revenue-employee correlation analysis
+     • Feature importance analysis
      • Export best model (Random Forest)             
 
                          ↓
@@ -135,7 +138,7 @@ jupyter notebook multivariate.ipynb
 - `best_model.pkl` (Random Forest, 97.9% accuracy)
 - `scaler.pkl` (StandardScaler for feature normalization)
 - `feature_names.pkl` (30 feature names)
-- 7+ visualization PNG files
+- 8 visualization PNG files
 
 ### 2⃣ Run the API Locally
 
@@ -273,7 +276,7 @@ flutter build apk
 
 ##  Visualizations Generated
 
-The Jupyter notebook creates 6 publication-ready visualizations to understand the data and model performance:
+The Jupyter notebook creates 8 publication-ready visualizations to understand the data and model performance:
 
 ### 1. Correlation Heatmap
 *Relationships between numeric features and employee count*
@@ -289,19 +292,19 @@ The Jupyter notebook creates 6 publication-ready visualizations to understand th
 
 ---
 
-### 3. Model Comparison
-*Performance metrics (R² and MSE) across all 4 algorithms*
+### 3. Sector & Technology Analysis
+*Job creation patterns by industry sector and tech adoption level*
 
-<img src="summative/linear_regression/images/model_comparison.png" alt="Model Comparison" width="700"/>
+<img src="summative/linear_regression/images/sector_tech_analysis.png" alt="Sector Tech Analysis" width="900"/>
 
 ---
 
-### 4. Actual vs Predicted - All Models
-*Visual comparison showing Random Forest's superior fit to the perfect line*
+### 4. Revenue-Employee Relationship Analysis
+*Correlation analysis showing how revenue relates to job creation across different sectors*
 
-<img src="summative/linear_regression/images/actual_vs_predicted_all_models.png" alt="Actual vs Predicted All Models" width="900"/>
+<img src="summative/linear_regression/images/revenue_employee_analysis.png" alt="Revenue Employee Analysis" width="900"/>
 
-**Key Insight**: Random Forest (bottom right) shows predictions tightly clustered around the perfect fit line (red dashed), achieving R²=0.9789 compared to Linear Regression's R²=0.2134.
+**Key Insight**: This analysis reveals sector-specific patterns where revenue alone is not a strong predictor. Labor-intensive sectors (Farming, Retail) show different revenue-employee relationships than capital-intensive sectors (Finance, Tech), explaining why complex models outperform simple linear regression.
 
 ---
 
@@ -312,12 +315,33 @@ The Jupyter notebook creates 6 publication-ready visualizations to understand th
 
 ---
 
-### 6. Sector & Technology Analysis
-*Job creation patterns by industry sector and tech adoption level*
+### 6. Model Comparison
+*Performance metrics (R² and MSE) across all 4 algorithms*
 
-<img src="summative/linear_regression/images/sector_tech_analysis.png" alt="Sector Tech Analysis" width="900"/>
+<img src="summative/linear_regression/images/model_comparison.png" alt="Model Comparison" width="700"/>
 
 ---
+
+### 7. Actual vs Predicted - All Models
+*Visual comparison showing Random Forest's superior fit to the perfect line*
+
+<img src="summative/linear_regression/images/actual_vs_predicted_all_models.png" alt="Actual vs Predicted All Models" width="900"/>
+
+**Key Insight**: Random Forest (bottom right) shows predictions tightly clustered around the perfect fit line (red dashed), achieving R²=0.9789 compared to Linear Regression's R²=0.2134.
+
+---
+
+### 8. Feature Importance Analysis
+*Comparison of Random Forest feature importance vs Linear Regression coefficients*
+
+<img src="summative/linear_regression/images/feature_importance.png" alt="Feature Importance" width="900"/>
+
+**Key Insight**: Random Forest reveals which features truly matter for job creation prediction. The comparison with Linear Regression coefficients shows why ensemble methods capture complex patterns that linear models miss, achieving 97.9% vs 21.3% accuracy.
+
+---
+*Gradient descent convergence over 1000 iterations*
+
+<img src="summative/linear_regression/images/loss_curve.png" alt="Loss Curve" width="700"/>
 
 ##  Technologies
 
@@ -347,10 +371,12 @@ Summative-ML/
        images/
           correlation_heatmap.png              # Feature relationships
           target_distribution.png              # Employee distribution
+          sector_tech_analysis.png             # Sector/tech patterns
+          revenue_employee_analysis.png        # Revenue-employee correlation by sector
+          loss_curve.png                       # SGD training curve
           model_comparison.png                 # Performance metrics
           actual_vs_predicted_all_models.png   # Model predictions visual
-          loss_curve.png                       # SGD training curve
-          sector_tech_analysis.png             # Sector/tech patterns
+          feature_importance.png               # RF importance vs LR coefficients
     API/
        prediction.py                           # FastAPI app (Pydantic V2)
        requirements.txt                        # API deps
