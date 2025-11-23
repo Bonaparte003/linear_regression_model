@@ -5,13 +5,26 @@
 # African SME Job Creation Predictor
 ## Eradicating Youth Unemployment Through Digital Transformation
 
-[![ML Model](https://img.shields.io/badge/Model-Random%20Forest-success)](https://scikit-learn.org/)
+[![Winning Model](https://img.shields.io/badge/Model-Random%20Forest-success)](https://scikit-learn.org/)
 [![Accuracy](https://img.shields.io/badge/R²-97.9%25-brightgreen)](/)
 [![API](https://img.shields.io/badge/API-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![Mobile](https://img.shields.io/badge/Mobile-Flutter-02569B)](https://flutter.dev/)
-[![Mission](https://img.shields.io/badge/Mission-SDG%208-orange)](https://sdgs.un.org/goals/goal8)
+
 
 </div>
+
+
+---
+
+##  Live Deployment
+
+**API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
+**Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
+**Video Demo**: https://www.youtube.com/watch?v=-LEypuhiTh4](https://www.youtube.com/watch?v=-LEypuhiTh4
+
+**Mobile App Apk**: [Click Me](https://release-assets.githubusercontent.com/github-production-release-asset/1099061418/4f28430a-fd40-4ce2-bd40-9a7e08d5c8a6?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-23T12%3A43%3A11Z&rscd=attachment%3B+filename%3Dapp-release.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-23T11%3A43%3A05Z&ske=2025-11-23T12%3A43%3A11Z&sks=b&skv=2018-11-09&sig=sm%2BKaawqmLByYri7nWkT%2B8ukFcHB4nFx0n%2BEUHRgSoU%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2Mzg5OTk4NSwibmJmIjoxNzYzODk4MTg1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.TBxmdKNeo6ajaPSgkrMFaKkehuA32qpipJGjCBz-ulA&response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&response-content-type=application%2Fvnd.android.package-archive)
+
+**N.B**: As the api endpoint is hosted onrender on a free tier - it's advisable to first make sure that the server is on by visiting this [link](https://linear-regression-model-sefx.onrender.com/docs)
 
 ---
 
@@ -111,21 +124,10 @@ This project directly addresses **UN SDG 8: Decent Work and Economic Growth** by
 
 ```
 
----
-
-##  Live Deployment
-
-**API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
-**Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
-**Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id)
-
-> **Note**: Update YouTube link once video is recorded
-
----
 
 ##  Quick Start
 
-### 1⃣ Train the Model
+### 1 Train the Model
 
 ```bash
 cd summative/linear_regression
@@ -140,7 +142,7 @@ jupyter notebook multivariate.ipynb
 - `feature_names.pkl` (30 feature names)
 - 8 visualization PNG files
 
-### 2⃣ Run the API Locally
+### 2 Run the API Locally
 
 ```bash
 cd summative/API
@@ -150,7 +152,7 @@ python prediction.py
 # Docs at http://localhost:8000/docs
 ```
 
-### 3⃣ Deploy API to Render
+### 3 Deploy API to Render
 
 1. Push code to GitHub
 2. Create Web Service on [Render](https://render.com)
@@ -158,7 +160,7 @@ python prediction.py
 4. Start: `cd summative/API && uvicorn prediction:app --host 0.0.0.0 --port $PORT`
 5. Copy public URL
 
-### 4⃣ Run Mobile App
+### 4 Run Mobile App
 
 ```bash
 cd summative/FlutterApp/upredict
