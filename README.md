@@ -20,7 +20,7 @@
 
 **API Endpoint**: `https://linear-regression-model-sefx.onrender.com/predict`  
 **Swagger Documentation**: `https://linear-regression-model-sefx.onrender.com/docs`  
-**Video Demo**: [YouTube Link - 5 min demo](https://youtu.be/your-video-id](https://www.youtube.com/watch?v=OZrxAPEmMjE)
+**Video Demo**: https://youtu.be/your-video-id](https://www.youtube.com/watch?v=OZrxAPEmMjE
 
 ---
 
