@@ -5,7 +5,7 @@
 # African SME Job Creation Predictor
 ## Eradicating Youth Unemployment Through Digital Transformation
 
-[![ML Winning Model](https://img.shields.io/badge/Model-Random%20Forest-success)](https://scikit-learn.org/)
+[![Winning Model](https://img.shields.io/badge/Model-Random%20Forest-success)](https://scikit-learn.org/)
 [![Accuracy](https://img.shields.io/badge/R²-97.9%25-brightgreen)](/)
 [![API](https://img.shields.io/badge/API-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![Mobile](https://img.shields.io/badge/Mobile-Flutter-02569B)](https://flutter.dev/)
